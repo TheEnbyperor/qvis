@@ -37,6 +37,10 @@
                     <span style="width: 12px; height: 8px; background-color: #808000; display: inline-block; margin-right: 1px; vertical-align: middle;"></span> 
                     : Bytes in flight
                 </p>
+                <p style="padding: 0; margin: 10px 0;">
+                    <span style="width: 12px; height: 8px; background-color: #2be243; display: inline-block; margin-right: 1px; vertical-align: middle;"></span>
+                    : Careful resume pipesize
+                </p>
 
             </div>
 

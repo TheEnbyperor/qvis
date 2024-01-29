@@ -55,6 +55,7 @@ export class MainGraphState {
     public metricUpdateLines!: {
         bytes: Array<[number, number]>,
         cwnd: Array<[number, number]>,
+        cr_pipesize: Array<[number, number]>,
         minRTT: Array<[number, number]>,
         smoothedRTT: Array<[number, number]>,
         lastRTT: Array<[number, number]>,
@@ -110,6 +111,7 @@ export class MainGraphState {
         this.metricUpdateLines = {
             bytes: new Array<[number, number]>(),
             cwnd: new Array<[number, number]>(),
+            cr_pipesize: new Array<[number, number]>(),
             minRTT: new Array<[number, number]>(),
             smoothedRTT: new Array<[number, number]>(),
             lastRTT: new Array<[number, number]>(),

@@ -120,7 +120,7 @@ export default class CongestionGraphD3Renderer {
                 .style("opacity", "0.7")
                 .attr("class", "ruler");
 
-            
+
             lineHorizontal = this.mainGraphState.mouseHandlerRulerSvg!
                 .append("line")
                 .attr("stroke", "black")
@@ -129,7 +129,7 @@ export default class CongestionGraphD3Renderer {
                 .attr("y1", "" + linePoints.y1 )
                 .attr("x2", "" + linePoints.x2 )
                 .attr("y2", "" + linePoints.y2 );
-            
+
             lineVertical = this.mainGraphState.mouseHandlerRulerSvg!
                 .append("line")
                 .attr("stroke", "black")
@@ -245,12 +245,12 @@ export default class CongestionGraphD3Renderer {
                 // .attr("y", Math.max( linePoints.y1, linePoints.y2 ) + 12)
                 .attr("y", linePoints.y1 + ( linePoints.y1 > linePoints.y2 ? 12 : -20 ))
                 .text( timeText )
-                
+
             textBytes
                 .attr("x", Math.max( linePoints.x1, linePoints.x2 ) + 12)
                 .attr("y", bytesCenter)
                 .text( bytesText )
-                
+
             textRate
                 // .attr("x", timeCenter)
                 // .attr("y", Math.max( linePoints.y1, linePoints.y2 ) - 50)
@@ -282,9 +282,9 @@ export default class CongestionGraphD3Renderer {
         this.mainGraphState.congestionGraphEnabled = this.mainGraphState.congestionGraphEnabled ? false : true;
 
         this.redrawCanvas(
-            this.mainGraphState.currentPerspective().rangeX[0], 
-            this.mainGraphState.currentPerspective().rangeX[1], 
-            this.mainGraphState.currentPerspective().rangeY[0], 
+            this.mainGraphState.currentPerspective().rangeX[0],
+            this.mainGraphState.currentPerspective().rangeX[1],
+            this.mainGraphState.currentPerspective().rangeY[0],
             this.mainGraphState.currentPerspective().rangeY[1]);
     }
 
@@ -296,9 +296,9 @@ export default class CongestionGraphD3Renderer {
         this.recoveryGraphState.zooming0RTTenabled = !this.recoveryGraphState.zooming0RTTenabled;
 
         this.redrawCanvas(
-            this.mainGraphState.currentPerspective().rangeX[0], 
-            this.mainGraphState.currentPerspective().rangeX[1], 
-            this.mainGraphState.currentPerspective().rangeY[0], 
+            this.mainGraphState.currentPerspective().rangeX[0],
+            this.mainGraphState.currentPerspective().rangeX[1],
+            this.mainGraphState.currentPerspective().rangeY[0],
             this.mainGraphState.currentPerspective().rangeY[1]);
     }
 
@@ -307,9 +307,9 @@ export default class CongestionGraphD3Renderer {
         this.mainGraphState.currentPerspective().rangeY = this.mainGraphState.currentPerspective().originalRangeY;
 
         this.redrawCanvas(
-            this.mainGraphState.currentPerspective().rangeX[0], 
-            this.mainGraphState.currentPerspective().rangeX[1], 
-            this.mainGraphState.currentPerspective().rangeY[0], 
+            this.mainGraphState.currentPerspective().rangeX[0],
+            this.mainGraphState.currentPerspective().rangeX[1],
+            this.mainGraphState.currentPerspective().rangeY[0],
             this.mainGraphState.currentPerspective().rangeY[1]);
     }
 
@@ -523,11 +523,11 @@ export default class CongestionGraphD3Renderer {
         // for our times on the x-axis, we cannot simply use eventParser.relativeTime or absoluteTime
         // we have situations where the reference_time in the qlog is the start time of the server, while the trace is made hours or days afterwards
         // that would give immensely large x-values with huge amounts of empty space up front
-        // so, we detect that situation here and use a custom time transformation function to deal with this. 
+        // so, we detect that situation here and use a custom time transformation function to deal with this.
         if ( this.config && this.config.connection && this.config.connection.getEvents().length > 0 ) {
             const firstEvent = this.config.connection.parseEvent( this.config.connection.getEvents()[0] );
             if ( firstEvent.relativeTime > 3000 ){ // 3 seconds of nothing
-                this._startTimeOffset = -1 * (firstEvent.relativeTime - 200); // just 200ms of nothing, then we start plotting 
+                this._startTimeOffset = -1 * (firstEvent.relativeTime - 200); // just 200ms of nothing, then we start plotting
             }
             else {
                 this._startTimeOffset = 0;
@@ -638,7 +638,7 @@ export default class CongestionGraphD3Renderer {
 
         // Find the extrema for each axis which we can use for the domains of the scales
         const [minCongestionY, maxCongestionY, minRTT, maxRTT] = this.findMetricUpdateExtrema();
-        const [localXMin, localXMax] = [settings.minX && settings.minX > 0 ? settings.minX : 0, 
+        const [localXMin, localXMax] = [settings.minX && settings.minX > 0 ? settings.minX : 0,
                                         settings.maxX && settings.maxX < this.mainGraphState.sent.originalRangeX[1] ? settings.maxX : this.mainGraphState.sent.originalRangeX[1]];
         const [localMinY, localMaxY] = this.findYExtrema(localXMin, localXMax);
 
@@ -739,7 +739,7 @@ export default class CongestionGraphD3Renderer {
         this.mainGraphState.useSentPerspective = false;
 
         // Find the extrema for each axis which we can use for the domains of the scales
-        const [localXMin, localXMax] = [settings.minX && settings.minX > 0 ? settings.minX : 0, 
+        const [localXMin, localXMax] = [settings.minX && settings.minX > 0 ? settings.minX : 0,
                                         settings.maxX && settings.maxX < this.mainGraphState.received.originalRangeX[1] ? settings.maxX : this.mainGraphState.received.originalRangeX[1]];
         const [localMinY, localMaxY] = this.findYExtrema(localXMin, localXMax);
 
@@ -787,9 +787,9 @@ export default class CongestionGraphD3Renderer {
 
     // Redraw canvas using the current set boundaries (stored in rangeX and rangeY for the current perspective)
     private async renderParts(){
-        this.redrawCanvas(this.mainGraphState.currentPerspective().rangeX[0], 
-                          this.mainGraphState.currentPerspective().rangeX[1], 
-                          this.mainGraphState.currentPerspective().rangeY[0], 
+        this.redrawCanvas(this.mainGraphState.currentPerspective().rangeX[0],
+                          this.mainGraphState.currentPerspective().rangeX[1],
+                          this.mainGraphState.currentPerspective().rangeY[0],
                           this.mainGraphState.currentPerspective().rangeY[1]);
     }
 
@@ -864,7 +864,7 @@ export default class CongestionGraphD3Renderer {
         //     After extensive testing, it seems like just keeping the scale at 1 is the best middle solution until this part can be properly refactored (someday)
         // currentPerspective.drawScaleY = this.yScalingFunction((currentPerspective.originalRangeY[1] - currentPerspective.originalRangeY[0]) / (maxY - minY));
         currentPerspective.drawScaleY = 1;
-    
+
         // We then iterate over either the list of packets sent or received, based on the current perspective
         const packetList = this.mainGraphState.useSentPerspective ? this.packetsSent : this.packetsReceived;
 
@@ -922,6 +922,10 @@ export default class CongestionGraphD3Renderer {
                     return [ this.mainGraphState.sent.xScale!(point[0]), this.mainGraphState.sent.yCongestionScale!(point[1]) ];
                 }), "#8A2BE2", this.drawCross);
 
+                this.drawLines(this.mainGraphState.canvasContext!, this.mainGraphState.metricUpdateLines.cr_pipesize.map((point) => {
+                    return [ this.mainGraphState.sent.xScale!(point[0]), this.mainGraphState.sent.yCongestionScale!(point[1]) ];
+                }), "#2be243", this.drawCross);
+
 
                 this.drawLines(this.mainGraphState.canvasContext!, this.mainGraphState.flowControlLines.application.map((point) => {
                     return [ this.mainGraphState.sent.xScale!(point[0]), this.mainGraphState.sent.yScale!(point[1]) ];
@@ -968,9 +972,9 @@ export default class CongestionGraphD3Renderer {
     }
 
     private drawLines(
-        canvasContext: CanvasRenderingContext2D, 
-        pointList: Array<[number, number]>, 
-        color: string, 
+        canvasContext: CanvasRenderingContext2D,
+        pointList: Array<[number, number]>,
+        color: string,
         tickDrawFunction: ((canvasContext: CanvasRenderingContext2D, x: number, y: number, color: string) => void) | undefined,
     ) {
         canvasContext.lineWidth = 1 * this.mainGraphState.currentPerspective().drawScaleX;
@@ -1048,9 +1052,9 @@ export default class CongestionGraphD3Renderer {
 
         if (redraw) {
             this.redrawCanvas(
-                this.mainGraphState.currentPerspective().rangeX[0], 
-                this.mainGraphState.currentPerspective().rangeX[1], 
-                this.mainGraphState.currentPerspective().rangeY[0], 
+                this.mainGraphState.currentPerspective().rangeX[0],
+                this.mainGraphState.currentPerspective().rangeX[1],
+                this.mainGraphState.currentPerspective().rangeY[0],
                 this.mainGraphState.currentPerspective().rangeY[1] );
         }
     }
@@ -1082,9 +1086,10 @@ export default class CongestionGraphD3Renderer {
         const packetsReceived = this.config.connection!.lookup(qlog.EventCategory.transport, qlog.TransportEventType.packet_received);
         const packetsLost = this.config.connection!.lookup(qlog.EventCategory.recovery, qlog.RecoveryEventType.packet_lost);
         const metricUpdates = this.config.connection!.lookup(qlog.EventCategory.recovery, qlog.RecoveryEventType.metrics_updated);
+        const crPhaseUpdates = this.config.connection!.lookup(qlog.EventCategory.recovery, qlog.RecoveryEventType.careful_resume_phase_updated);
         const transportParams = this.config.connection!.lookup(qlog.EventCategory.transport, qlog.TransportEventType.parameters_set);
 
-        // these are Map<string, Map<string,Packet>>, 
+        // these are Map<string, Map<string,Packet>>,
         // where the top-level key is the packet type (initial, handshake, 1RTT, 0RTT) and the other key is the stringified packet number
         const packetSentList:Map<string, Map<string,any>>       = new Map<string, Map<string,any>>();
         const packetReceivedList:Map<string, Map<string,any>>   = new Map<string, Map<string,any>>();
@@ -1216,12 +1221,12 @@ export default class CongestionGraphD3Renderer {
                         // so keep track of each absolute value per-stream and sum them up each time something changes
                         const streamID = "" + (frame as qlog.IMaxStreamDataFrame).stream_id;
                         streamFCMap.set( streamID, parseFloat(frame.maximum) );
-                        
+
                         let streamFCSum = 0;
                         for ( const val of streamFCMap.values() ){
                             streamFCSum += val;
                         }
-                        
+
                         // TODO: make sure the axis limits accomodate this? However, if someone sends massively huge FC, this will mess with normal rendering
                         // for now: only render FC updates that are within range of the total sent data (otherwhise, they're not useful either way)
                         this.mainGraphState.flowControlLines.stream.push([timestamp, streamFCSum]);
@@ -1342,7 +1347,7 @@ export default class CongestionGraphD3Renderer {
                     for (let ackedNr = from; ackedNr <= to; ++ackedNr) {
                         // find the originally received packet
                         let receivedPacket = null;
-                        
+
                         const packetType = data.header.packet_type;
                         if ( packetReceivedList.has(packetType) )
                             receivedPacket = packetReceivedList.get(packetType)!.get( "" + ackedNr );
@@ -1441,6 +1446,19 @@ export default class CongestionGraphD3Renderer {
             }
         }
 
+        for (const update of crPhaseUpdates) {
+            const parsedUpdate = this.config.connection!.parseEvent(update);
+            const data = parsedUpdate.data;
+            const timestamp = this.transformTime( parsedUpdate.relativeTime );
+
+            if (data.pipesize) {
+                const y = data.pipesize;
+                sent.minCongestionY = sent.minCongestionY > y ? y : sent.minCongestionY;
+                sent.maxCongestionY = sent.maxCongestionY < y ? y : sent.maxCongestionY;
+                this.mainGraphState.metricUpdateLines.cr_pipesize.push([timestamp, y]);
+            }
+        }
+
         // Store these for easy access later so we don't have to do a lookup every redraw
         // Given that they will only change when loading in a new log we do not have to worry about that
         this.packetsSent = packetsSent;
@@ -1461,12 +1479,13 @@ export default class CongestionGraphD3Renderer {
         // Store the lines so they can easily be drawn later
         this.mainGraphState.metricUpdateLines.bytes         = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.bytes);
         this.mainGraphState.metricUpdateLines.cwnd          = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.cwnd);
+        this.mainGraphState.metricUpdateLines.cr_pipesize   = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.cr_pipesize);
         this.mainGraphState.metricUpdateLines.minRTT        = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.minRTT);
         this.mainGraphState.metricUpdateLines.smoothedRTT   = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.smoothedRTT);
         this.mainGraphState.metricUpdateLines.lastRTT       = this.fixMetricUpdates(this.mainGraphState.metricUpdateLines.lastRTT);
 
-        this.mainGraphState.flowControlLines.application    = this.fixMetricUpdates(this.mainGraphState.flowControlLines.application); 
-        this.mainGraphState.flowControlLines.stream         = this.fixMetricUpdates(this.mainGraphState.flowControlLines.stream); 
+        this.mainGraphState.flowControlLines.application    = this.fixMetricUpdates(this.mainGraphState.flowControlLines.application);
+        this.mainGraphState.flowControlLines.stream         = this.fixMetricUpdates(this.mainGraphState.flowControlLines.stream);
     }
 
     /* Zooming is based on x position of the cursor
@@ -1500,8 +1519,8 @@ export default class CongestionGraphD3Renderer {
 
         // Cap at full fit
         const newLeftX = mouseX - zoomedLeftPortion >= 0 ? mouseX - zoomedLeftPortion : 0;
-        const newRightX = mouseX + zoomedRightPortion <= this.mainGraphState.currentPerspective().originalRangeX[1] 
-                            ? mouseX + zoomedRightPortion 
+        const newRightX = mouseX + zoomedRightPortion <= this.mainGraphState.currentPerspective().originalRangeX[1]
+                            ? mouseX + zoomedRightPortion
                             : this.mainGraphState.currentPerspective().originalRangeX[1];
 
         const [newTopY, newBottomY] = this.findYExtrema(newLeftX, newRightX);
@@ -1548,9 +1567,9 @@ export default class CongestionGraphD3Renderer {
         this.mainGraphState.packetInformationDiv!.select("#ackedTo").text("");
     }
 
-    
 
-    
+
+
     // Hovering over a packet gives a tooltip displaying information about the packet
     // Hovering over an ACK packet also draws an indicator towards the corresponding packets it has ACKed
     // Picking is done based on y coordinate of the cursor and the color of the pixel the mouse hovers over
@@ -1597,7 +1616,7 @@ export default class CongestionGraphD3Renderer {
                     this.mainGraphState.packetInformationDiv!.style("margin-top", (svgHoverCoords[1] + this.mainGraphState.margins.top + 10) + "px");
                     this.mainGraphState.packetInformationDiv!.select("#timestamp").text("Timestamp: " + parsedPacketTime);
                     this.mainGraphState.packetInformationDiv!.select("#packetNr").text("PacketNr: " + (parsedPacketData.header ? parsedPacketData.header.packet_type : "" ) + " " +  (parsedPacketData.header ? parsedPacketData.header.packet_number : "?"));
-                    
+
                     let packetText = "PacketSize: " + parsedPacketData.raw.length;
 
                     for ( let i = 0; i < this.mainGraphState.metricUpdateLines.cwnd.length - 2; ++i ){
@@ -1663,7 +1682,7 @@ export default class CongestionGraphD3Renderer {
                     const topY = this.mainGraphState.currentPerspective().yScale!(extraDetails.from);
                     const bottomY = this.mainGraphState.currentPerspective().yScale!(extraDetails.to);
                     const height = (topY - bottomY) * this.mainGraphState.currentPerspective().drawScaleY;
-                    const width = this.mainGraphState.currentPerspective().xScale!( this.transformTime(parsedAckPacket.relativeTime) ) - 
+                    const width = this.mainGraphState.currentPerspective().xScale!( this.transformTime(parsedAckPacket.relativeTime) ) -
                                     this.mainGraphState.currentPerspective().xScale!(parsedPacketTime);
 
                     this.mainGraphState.graphSvg!
@@ -1864,7 +1883,7 @@ export default class CongestionGraphD3Renderer {
         if ( minRTT === Number.MAX_VALUE ) {
             minRTT = 0;
         }
-        
+
         if ( maxRTT === Number.MIN_VALUE ) {
             maxRTT = 0;
         }

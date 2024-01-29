@@ -105,7 +105,7 @@ router.beforeEach((to, from, next) => {
         for ( const entry of params.entries() ){
             query[ entry[0] ] = entry[1];
         }
-        next({ name: to.name, query: query });
+        next({ name: to.name || undefined, query: query });
     }
     else {
         next();

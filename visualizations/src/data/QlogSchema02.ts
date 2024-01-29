@@ -188,6 +188,8 @@ export enum RecoveryEventType {
 
     packet_lost = "packet_lost",
     marked_for_retransmit = "marked_for_retransmit",
+
+    careful_resume_phase_updated = "careful_resume_phase_updated",
 }
 
 // ================================================================== //

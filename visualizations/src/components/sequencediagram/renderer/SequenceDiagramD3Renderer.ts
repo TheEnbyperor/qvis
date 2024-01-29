@@ -2118,6 +2118,19 @@ export class SequenceDiagramD3Renderer {
                     return evt.name;
                 }
                 break;
+
+            case qlog.RecoveryEventType.careful_resume_phase_updated:
+                if ( evt.data && evt.data.new !== undefined ) {
+                    let out = `new CR phase: ${evt.data.new}`;
+                    if (evt.data.trigger !== undefined) {
+                        out += ` trigger: ${evt.data.trigger}`;
+                    }
+                    return out;
+                }
+                else {
+                    return evt.name;
+                }
+                break;
             
             case qlog.HTTP3EventType.frame_parsed:
             case qlog.HTTP3EventType.frame_created:
